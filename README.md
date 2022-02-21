@@ -156,7 +156,7 @@ An endpoint was deployed with the final model. The inference.py script was used.
 
 The image was deserialized in the input_fn function.
 
-<code>if content_type == JPEG_CONTENT_TYPE: 
+```if content_type == JPEG_CONTENT_TYPE: 
     return Image.open(io.BytesIO(request_body))
     
 if content_type == JSON_CONTENT_TYPE:
@@ -164,11 +164,11 @@ if content_type == JSON_CONTENT_TYPE:
     url = request['url']
     img_content = requests.get(url).content
     return Image.open(io.BytesIO(img_content))    
-</code>
+```
 
 The image was processed in the predict_fn function. It was resized, converted to a tensor, normalized and unsqueezed) and used to make a prediction. 
 
-<code>test_transform = transforms.Compose([
+```test_transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
@@ -181,17 +181,17 @@ input1 = batchified.to(device)
 with torch.no_grad():
     prediction = model(input1)
     return prediction
-</code>
+```
 
 
 The endpoint was queried with images 923.jpg [16] and 777.jpg [11] to make predictions. In the sagemaker.ipynb notebook, the code below was used.
 
-<code>import requests
+```import requests
 
 request_dict={ "url": "https://aft-vbi-pds.s3.amazonaws.com/bin-images/923.jpg" }
 img_bytes = requests.get(request_dict['url']).content
 response=predictor.predict(img_bytes, initial_args={"ContentType": "image/jpeg"})
-</code>
+```
 
 Image 923.jpg is shown below from [16]. Its corresponding metadata [17] has an expected quantity=4. 
 
@@ -201,22 +201,22 @@ Image 923.jpg is shown below from [16]. Its corresponding metadata [17] has an e
 
 The results for image 923.jpg are shown below. The maximum is in bold (index=2). The model could not predict the correct result (index=3).
  
-<code>[-1.8109267950057983,
+```[-1.8109267950057983,
 0.2871607542037964,
 <b>0.66116863489151</b>,
 0.5736399292945862,
 0.3940010368824005]
-</code>
+```
 
 
 The results for image 777.jpg [11] are shown below. Its corresponding metadata [12] has an expected quantity=3 but it looks like there are 2 objects in the image, 1 could be occluded. 
 
-<code>[<b>2.741820812225342</b>,
+```[<b>2.741820812225342</b>,
 1.6072783470153809,
 -0.2160869836807251,
 -2.114128589630127,
 -3.8471338748931885]
-</code>
+```
 
 The maximum is in bold (index=0). The model could not predict the correct result (index=2). If the number
 of objects is taken as 2 (index=1), the result would be also be incorrect.
