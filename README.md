@@ -51,7 +51,7 @@ image (777.jpg) [11] and its corresponding metadata [12] are shown below.
 
 ![777.jpg](images/777.jpg)
 
-<code>{ "BIN_FCSKU_DATA":
+```{ "BIN_FCSKU_DATA":
  { "B0067EQF9I":
  { "asin": "B0067EQF9I",
  "height": { "unit": "IN", "value": 2.2 },
@@ -62,7 +62,7 @@ image (777.jpg) [11] and its corresponding metadata [12] are shown below.
  "width": { "unit": "IN", "value": 3.8 } } },
  "EXPECTED_QUANTITY": 3,
  "image_fname": "777.jpg"}
-</code>
+```
 
 Due to the large size of the data, a small subset of the data will be used to stay within the allocated budget.
 The data subset consists of folders where the name of each folder is equal to the number of objects in each
