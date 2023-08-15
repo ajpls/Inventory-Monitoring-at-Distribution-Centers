@@ -166,7 +166,7 @@ if content_type == JSON_CONTENT_TYPE:
     return Image.open(io.BytesIO(img_content))    
 ```
 
-The image was processed in the predict_fn function. It was resized, converted to a tensor, normalized and unsqueezed) and used to make a prediction. 
+The image was processed in the predict_fn function. It was resized, converted to a tensor, normalize, unsqueezed and used to make a prediction. 
 
 ```test_transform = transforms.Compose([
     transforms.Resize((224, 224)),
